@@ -1,6 +1,10 @@
-var canvas, ctx, h, w, now, then, delta, id;
+var canvas, ctx, h, w, now, then, delta, id, btn1, btn2;;
 
 canvas = document.getElementById("Canvas");
+btn1 = document.getElementById("btn1");
+btn2 = document.getElementById("btn2");
+btn3 = document.getElementById("btn3");
+
 ctx = canvas.getContext('2d');
 
 w = canvas.width;
@@ -10,26 +14,42 @@ var x = 20,
     y = 20,
     k = 20,
     vx = 1;
-var str = ['H', 'a', 'p', 'p', 'y', 'N', 'e', 'w', 'Y', 'e', 'a', 'r'];
+var str = ['H', 'a', 'p', 'p', 'y',' ', 'N', 'e', 'w', ' ', 'Y', 'e', 'a', 'r'];
 var yr = '2017';
-//ctx.strokeRect(20,20,20,20);
-var witch = {
+
+// Initialize the witch and the ball/
+var initWitch = {
     x: 40,
     y: 120,
     vwx: 1,
     vwy: 1
 };
-var ball = {
+var initBall = {
     x: 30,
     y: 400,
     r: 10,
     vx: 4,
     vy: 5,
-    //  onclick:updateBall(300,400)
+};
+
+
+
+var  witch = {
+    x: 40,
+    y: 120,
+    vwx: 1,
+    vwy: 1
+};
+var  ball = {
+    x: 30,
+    y: 400,
+    r: 10,
+    vx: 4,
+    vy: 5,
 };
 
 then = new Date().getTime();
-window.ondblclick = function init() {
+window.onload = function init() {
     startAnimation();
 };
 
@@ -56,7 +76,7 @@ function updateWish(delta) {
     x += vx * delta / 100;
 }
 
-
+// Draw text
 function drawWish(s, k) {
     ctx.save();
     if (yr === '2018') {
@@ -84,6 +104,7 @@ function drawWish(s, k) {
 }
 var angle = 0;
 
+//Draw the witch
 function drawWitch() {
     ctx.save();
     //temple, nose, mouth
@@ -92,15 +113,7 @@ function drawWitch() {
         angle += delta / 100;
         ctx.rotate(angle);
         ctx.scale(1 / Math.abs(angle / 10), 1 / Math.abs(angle / 10));
-        //  ctx.strokeText(delta,0,0);
-    }
-    //  this.rotate1 = function(){
-    //     ctx.translate(witch.x,witch.y);
-
-    //    ctx.rotate(0.9);
-    //ctx.scale(0.4,0.4);
-    // }
-    // this.draw = function(){
+     }
     ctx.beginPath();
     ctx.moveTo(0, 0); //(witch.x,witch.y);
     ctx.arc(50, 90, 40, 1.3 * Math.PI, 0.9 * Math.PI, true); //(witch.x+50,witch.y+90,40,1.3*Math.PI,0.9*Math.PI,true);
@@ -163,17 +176,7 @@ function drawWitch() {
         ctx.lineTo(240 + i * Math.random() * 5, 120 - i * Math.random() * 5); //(witch.x+240+i*Math.random()*5,witch.y+120-i*Math.random()*5);
     }
     ctx.stroke();
-    // };
-    /* this.rotate = function(){
-       ctx.rotate(Math.PI/2);
-     }*/
-
-    /* this.move=function(){
-       witch.x += witch.vwx;
-       witch.y += witch.vwy;
-     }*/
     ctx.restore();
-    //}
 }
 
 function updateWitch(delta) {
@@ -200,7 +203,6 @@ function updateWitch(delta) {
     witch.x += witch.vwx * delta / 5;
     witch.y += witch.vwy * delta / 10;
     ctx.font = "60pt Ariel"
-        //  ctx.strokeText(inputStates,20,40);
 }
 
 function drawBall() {
@@ -235,9 +237,9 @@ function updateBall(delta) {
     ball.x += ball.vx * delta / 10;
     ball.y -= ball.vy * delta / 10;
 
-    if (yr === '2018') {
+   /* if (yr === '2018') {
         ball.r *= delta / 1000;
-    }
+    }*/
 }
 
 function collisionWithNose() {
@@ -257,14 +259,33 @@ function getMousePos(evt) {
 }
 
 // Mouse event listeners
-canvas.addEventListener('mousedown', function(evt) {
-    inputStates = true;
-    console.log(reset);
+// Reset (may not work ?)
+btn1.addEventListener('click', function(evt) {
+    clearCanvas();
+    cancelAnimationFrame(id);
+    x = 20;
+    y = 20;
+    witch = initWitch;
+    console.log(12 + " " + witch.y);
+    ball = initBall;
+    inputStates = false;
+   drawWitch();
+    drawBall();
+    yr = "2017";
+    startAnimation();
 }, false);
 
-// Key press listener
+// Continuation after pause
 
-canvas.addEventListener('click', function(evt) {
+btn2.addEventListener('click', function(evt) {
+    inputStates = true;
+    console.log(reset);
+    startAnimation();
+
+}, false);
+ 
+//  click to stop animation
+btn3.addEventListener('click', function(evt) {
     reset = true;
     stopAnimation();
 }, false);
@@ -275,6 +296,8 @@ function stopAnimation()  {
 
     cancelAnimationFrame(id);
 }
+
+// main animation loop
 function mainLoop() {
 
     clearCanvas();
@@ -287,19 +310,10 @@ function mainLoop() {
     }
 
     drawWitch();
-    //wit.move();
-    // wit.draw();
-    // wit.rotate1();
-
     updateWitch(delta);
-    // wit.draw();
 
-    if (inputStates) { //if (inputStates.mousePos) {
-        // if (inputStates.mousePos.x<ball.x+5&&inputStates.mousePos.x>ball.x-5){
+    if (inputStates) { 
         updateBall(delta);
-        //    inputStates.mousePos.x = ball.x;
-        //    inputStates.mousePos.y = ball.y;
-        // }
     }
 
     drawBall();

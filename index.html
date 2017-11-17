@@ -5,6 +5,21 @@
     <title>Happy New Year</title>
 </head>
 <style>
+    .header-witch {
+       width: 90%;
+       height: 10%
+       padding-right: 50px;
+     /*  margin-right: 5%; */
+       background-color: red; 
+       text-color: white;
+       text-align: center;
+    }
+    .header-witch > a {
+        text-decoration: none;
+    }
+    .header-witch > a > h1 {
+        color: white;
+    }
     #Canvas {
         margin-left: 175px;
         margin-right: 170px;
@@ -20,16 +35,39 @@
    h3 {
        color: black;
    }
+   #btn1 {
+       width: auto;
+       height: 30px;
+       background-color: lightblue;
+       text-color: red;
+   }
+   #btn2 {
+       width: auto;
+       height: 30px;
+       background-color: lightblue;
+       text-color: red;
+   }
+   #btn3 {
+       width: auto;
+       height: 30px;
+       background-color: lightblue;
+       text-align: center;
+   }
+
+h2 {
+     color: darkblue;
+   }
+
 </style>
 
 <body>
-
     <canvas id="Canvas" width=900 height=500></canvas>
-</body>
 <footer class="footer">
-    <h3> Double click to start</h3>
-    <h3> Click to stop</h3>
+    <button id="btn1" value=submit><h2>reset<h2></button>
+    <button id="btn2" value=submit><h2>strike/continue</h2></button>
+    <button id="btn3" value=submit><h2>stop</h2></button>
 </footer>
+</body>
 <script src="hpy2018.js">
 </script>
 
