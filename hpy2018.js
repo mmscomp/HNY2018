@@ -269,6 +269,7 @@ btn1.addEventListener('click', function(evt) {
     console.log(12 + " " + witch.y);
     ball = initBall;
     inputStates = false;
+    angle = 0;
    drawWitch();
     drawBall();
     yr = "2017";
