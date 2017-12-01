@@ -210,7 +210,7 @@ function drawBall() {
     //  ball.y=y;
     ctx.save()
     ctx.beginPath();
-    ctx.moveTo(ball.x, ball.y);
+  //  ctx.moveTo(ball.x, ball.y);
     ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
     ctx.fillStyle = 'green';
     ctx.fill();
@@ -262,14 +262,14 @@ function getMousePos(evt) {
 // Reset (may not work ?)
 btn1.addEventListener('click', function(evt) {
     clearCanvas();
-    cancelAnimationFrame(id);
+ //   cancelAnimationFrame(id);
     x = 20;
     y = 20;
     witch = initWitch;
-    console.log(12 + " " + witch.y);
-    ball = initBall;
     inputStates = false;
     angle = 0;
+   ball.x = 30;
+   ball.y = 400;
    drawWitch();
     drawBall();
     yr = "2017";
