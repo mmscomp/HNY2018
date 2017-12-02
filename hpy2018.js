@@ -270,6 +270,8 @@ btn1.addEventListener('click', function(evt) {
     angle = 0;
    ball.x = 30;
    ball.y = 400;
+   ball.vx = 4;
+   ball.vy = 5;
    drawWitch();
     drawBall();
     yr = "2017";
