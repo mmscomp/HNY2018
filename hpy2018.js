@@ -289,7 +289,7 @@ btn2.addEventListener('click', function(evt) {
  
 //  click to stop animation
 btn3.addEventListener('click', function(evt) {
-    reset = true;
+    inputStates = false;
     stopAnimation();
 }, false);
 
